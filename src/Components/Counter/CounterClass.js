@@ -1,47 +1,52 @@
-import { useState } from 'react';
+import { Component } from 'react';
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
-
-  const AddCounter = (num) => {
+class Counter extends Component {
+  state = {
+    count: 0,
+  };
+  AddCounter = (num) => {
     for (let i = 0; i < num; i++) {
-      setCount((prevCount) => prevCount + 1);
+      this.setState((prevState) => {
+        return { count: prevState.count + 1 };
+      });
     }
   };
-  const SubCounter = (num) => {
+  SubCounter = (num) => {
     for (let i = 0; i > num; i--) {
-      setCount((prevCount) => prevCount - 1);
+      this.setState((prevState) => {
+        return { count: prevState.count - 1 };
+      });
     }
   };
-
-  return (
-    <div>
-      <h3> Count: {count}</h3>
-      <div id="Add">
+  render() {
+    return (
+      <div>
+        <h3> Count: {this.state.count}</h3>
+        <div id="Add">
         <button
           onClick={() => {
-            AddCounter(1);
+            this.AddCounter(1);
           }}
         >
           {'+1'}
         </button>
         <button
           onClick={() => {
-            AddCounter(2);
+            this.AddCounter(2);
           }}
         >
           {'+2'}
         </button>
         <button
           onClick={() => {
-            AddCounter(5);
+            this.AddCounter(5);
           }}
         >
           {'+5'}
         </button>
         <button
           onClick={() => {
-            AddCounter(10);
+            this.AddCounter(10);
           }}
         >
           {'+10'}
@@ -51,36 +56,37 @@ const Counter = () => {
       <div id="Sub">
         <button
           onClick={() => {
-            SubCounter(-1);
+            this.SubCounter(-1);
           }}
         >
           {'-1'}
         </button>
         <button
           onClick={() => {
-            SubCounter(-2);
+            this.SubCounter(-2);
           }}
         >
           {'-2'}
         </button>
         <button
           onClick={() => {
-            SubCounter(-5);
+            this.SubCounter(-5);
           }}
         >
           {'-5'}
         </button>
         <button
           onClick={() => {
-            SubCounter(-10);
+            this.SubCounter(-10);
           }}
         >
           {'-10'}
         </button>
       </div>
       <br />
-    </div>
-  );
-};
+      </div>
+    );
+  }
+}
 
 export default Counter;

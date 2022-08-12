@@ -1,4 +1,4 @@
-import Counter from './Components/Counter/CounterHook';
+import Counter from './Components/Counter/CounterClass';
 
 const App = () => {
   return (
