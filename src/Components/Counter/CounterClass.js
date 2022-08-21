@@ -1,89 +1,44 @@
 import { Component } from 'react';
+import CounterButton from './CounterButton';
 
 class Counter extends Component {
   state = {
     count: 0,
   };
-  AddCounter = (num) => {
-    for (let i = 0; i < num; i++) {
-      this.setState((prevState) => {
-        return { count: prevState.count + 1 };
-      });
-    }
+  numbers = [1, 2, 5, 10, 50, 100];
+
+  ChangeCounter = (num) => {
+    this.setState((prevState) => (prevState.count += num));
   };
-  SubCounter = (num) => {
-    for (let i = 0; i > num; i--) {
-      this.setState((prevState) => {
-        return { count: prevState.count - 1 };
-      });
-    }
-  };
+
   render() {
     return (
       <div>
         <h3> Count: {this.state.count}</h3>
         <div id="Add">
-        <button
-          onClick={() => {
-            this.AddCounter(1);
-          }}
-        >
-          {'+1'}
-        </button>
-        <button
-          onClick={() => {
-            this.AddCounter(2);
-          }}
-        >
-          {'+2'}
-        </button>
-        <button
-          onClick={() => {
-            this.AddCounter(5);
-          }}
-        >
-          {'+5'}
-        </button>
-        <button
-          onClick={() => {
-            this.AddCounter(10);
-          }}
-        >
-          {'+10'}
-        </button>
-      </div>
-      <br />
-      <div id="Sub">
-        <button
-          onClick={() => {
-            this.SubCounter(-1);
-          }}
-        >
-          {'-1'}
-        </button>
-        <button
-          onClick={() => {
-            this.SubCounter(-2);
-          }}
-        >
-          {'-2'}
-        </button>
-        <button
-          onClick={() => {
-            this.SubCounter(-5);
-          }}
-        >
-          {'-5'}
-        </button>
-        <button
-          onClick={() => {
-            this.SubCounter(-10);
-          }}
-        >
-          {'-10'}
-        </button>
-      </div>
-      <br />
+          {this.numbers.map((number) => {
+            return (
+              <CounterButton
+                num={number}
+                click={() => this.ChangeCounter(number)}
+                key={number}
+              />
+            );
+          })}
+        </div>
+        <div id="Sub">
+          {this.numbers.map((number) => {
+            number = -number;
+            return (
+              <CounterButton
+                num={number}
+                click={() => this.ChangeCounter(number)}
+                key={number}
+              />
+            );
+          })}
+        </div>
+        <br />
       </div>
     );
   }
